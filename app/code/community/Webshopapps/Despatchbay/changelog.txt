@@ -1,0 +1,5 @@
+1.0  - DespatchBay
+1.0.1  - DB2 - Resolved issue with wrong method at the top of label dropdown
+1.0.2  - DB3 - Removed redundant configuration options
+1.0.3  - DB3 - Added formatting checks to URL
+1.0.5  - DB5 - Changed attribute within the shipment request

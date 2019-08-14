@@ -1,0 +1,61 @@
+eav:
+  catalog_product:
+    - entity_id: 37
+      sku: SINGLE_MAXQTY_4_NODIMS_5LB
+      type_id: simple
+      name: SINGLE_MAXQTY_4_NODIMS_5LB
+      description: SINGLE_MAXQTY_4_NODIMS_5LB
+      short_description: SINGLE_MAXQTY_4_NODIMS_5LB
+      url_key: SINGLE_MAXQTY_4_NODIMS_5LB
+      price: 12.00
+      category_ids:
+        - 2 # Default Category
+      weight: 5
+      stock:
+        qty: 100.00
+        is_in_stock: 1
+      website_ids:
+        - base
+      tax_class_id: 2 # Taxable Goods
+      status: 1             # Enabled
+      visibility: 4         # Visible in Catalog & Search
+    - entity_id: 18 #         'SEP_5LB_NO_DIM'
+      type_id: simple
+      sku: SEP_5LB_NO_DIM
+      name: SEP_5LB_NO_DIM
+      short_description: SEP_5LB_NO_DIM
+      description: SEP_5LB_NO_DIM
+      url_key: SEP_5LB_NO_DIM
+      stock:
+        qty: 100.00
+        is_in_stock: 1
+      website_ids:
+        - base
+      category_ids:
+        - 2 # Default Category
+      price: 12.99
+      weight: 5
+      tax_class_id: 2 # Taxable Goods
+      status: 1             # Enabled
+      visibility: 4         # Visible in Catalog & Search
+      ship_separately: 1
+tables:
+  sales/quote:
+    - entity_id: 1
+      store_id: 1
+  sales/quote_address:
+    - address_id: 1
+      quote_id: 1
+      firstname: John
+      lastname: Doe
+      street: 1 Street, apt 1
+      city: Somewhere
+  sales/quote_item:
+    - item_id: 1   # using standard mechanism provided by Ivan
+      quote_id: 1
+      product_id: 37 # SINGLE_MAXQTY_4_NODIMS_5LB
+      qty: 2
+    - item_id: 18
+      quote_id: 1
+      product_id: 18 # SEP_5LB_NO_DIM
+      qty: 2

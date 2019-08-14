@@ -1,0 +1,49 @@
+<?php
+/**
+ * WebShopApps Shipping Module
+ *
+ * @category    WebShopApps
+ * @package     WebShopApps_Despatchbay
+ * User         Joshua Stewart
+ * Date         15/04/2014
+ * Time         10:16
+ * @copyright   Copyright (c) 2014 Zowta Ltd (http://www.WebShopApps.com)
+ *              Copyright, 2014, Zowta, LLC - US license
+ * @license     http://www.WebShopApps.com/license/license.txt - Commercial license
+ *
+ */
+?>
+<?php
+/**
+ * @see Shipperhq_Shipper_Block_Adminhtml_Carrier_Allowedmethods.php
+ */
+?>
+
+<script type="text/javascript">
+    //<![CDATA[
+    function getAllowedMethods() {
+        var elem = $('<?php echo $this->getHtmlId() ?>');
+
+        new Ajax.Request('<?php echo $this->getAjaxUrl() ?>', {
+            onSuccess: function(response) {
+
+                try {
+                    response = response.responseText.evalJSON();
+                    result = response.message;
+                    if (response.result == 1) {
+                        elem.removeClassName('fail').addClassName('success')
+                    } else {
+                        elem.removeClassName('success').addClassName('fail')
+                    }
+                } catch (e) {
+                    elem.removeClassName('success').addClassName('fail')
+                }
+                $('allowedmethods_result').update(result);
+            }
+        });
+    }
+    //]]>
+</script>
+<button onclick="javascript:getAllowedMethods(); return false;" class="scalable" type="button" id="<?php echo $this->getHtmlId() ?>">
+    <span id="allowedmethods_result"><?php echo $this->escapeHtml($this->getButtonLabel()) ?></span>
+</button>

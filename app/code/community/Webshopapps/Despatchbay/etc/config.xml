@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * WebShopApps Shipping Module
+ *
+ * @category    WebShopApps
+ * @package     WebShopApps_Despatchbay
+ * User         Josh Stewart
+ * Date         13 April 2014
+ * Time         11:00 AM
+ * @copyright   Copyright (c) 2014 Zowta Ltd (http://www.WebShopApps.com)
+ *              Copyright, 2014, Zowta, LLC - US license
+ * @license     http://www.WebShopApps.com/license/license.txt - Commercial license
+ *
+ */
+ -->
+<config>
+    <modules>
+        <Webshopapps_Despatchbay>
+            <version>0.1.0</version>
+            <depends>
+                <Mage_Shipping />
+            </depends>
+        </Webshopapps_Despatchbay>
+    </modules>
+    <global>
+        <models>
+            <webshopapps_despatchbay>
+                <class>Webshopapps_Despatchbay_Model</class>
+                <resourceModel>webshopapps_despatchbay_resource</resourceModel>
+            </webshopapps_despatchbay>
+            <webshopapps_despatchbay_shipping>
+                <class>Webshopapps_Despatchbay_Model</class>
+            </webshopapps_despatchbay_shipping>
+        </models>
+        <blocks>
+            <webshopapps_despatchbay>
+                <class>Webshopapps_Despatchbay_Block</class>
+            </webshopapps_despatchbay>
+        </blocks>
+        <helpers>
+            <webshopapps_despatchbay>
+                <class>Webshopapps_Despatchbay_Helper</class>
+            </webshopapps_despatchbay>
+        </helpers>
+        <sales>
+            <shipping>
+                <carriers>
+                    <despatchbay>
+                        <class>Webshopapps_Despatchbay_Model_Carrier_Despatchbay</class>
+                    </despatchbay>
+                </carriers>
+            </shipping>
+        </sales>
+        <events>
+            <admin_system_config_changed_section_carriers>
+                <observers>
+                    <connection_observer>
+                        <class>webshopapps_despatchbay/observer</class>
+                        <method>postError</method>
+                    </connection_observer>
+                </observers>
+            </admin_system_config_changed_section_carriers>
+            <adminhtml_controller_action_predispatch_start>
+                <observers>
+                    <webshopapps_despatchbay_labelcreate>
+                        <class>webshopapps_despatchbay/observer</class>
+                        <method>adminhtmlControllerActionPredispatchStart</method>
+                    </webshopapps_despatchbay_labelcreate>
+                </observers>
+            </adminhtml_controller_action_predispatch_start>
+            <core_block_abstract_to_html_before>
+                <observers>
+                    <webshopapps_despatchbay_add_checkbox>
+                        <class>webshopapps_despatchbay/observer</class>
+                        <method>coreBlockAbstractToHtmlBefore</method>
+                    </webshopapps_despatchbay_add_checkbox>
+                </observers>
+            </core_block_abstract_to_html_before>
+        </events>
+    </global>
+    <admin>
+        <routers>
+            <webshopapps_despatchbay>
+                <use>admin</use>
+                <args>
+                    <module>Webshopapps_Despatchbay</module>
+                    <frontName>webshopapps_despatchbay</frontName>
+                </args>
+            </webshopapps_despatchbay>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <webshopapps_despatchbay module="Webshopapps_Despatchbay">
+                    <file>webshopapps_despatchbay.xml</file>
+                </webshopapps_despatchbay>
+            </updates>
+        </layout>
+    </adminhtml>
+    <default>
+        <carriers>
+            <despatchbay>
+                <active>0</active>
+                <title>Despatch Bay</title>
+                <serial backend_model="adminhtml/system_config_backend_encrypted" />
+                <despatch_api_user backend_model="adminhtml/system_config_backend_encrypted" />
+                <despatch_api_key backend_model="adminhtml/system_config_backend_encrypted" />
+                <ship_once>0</ship_once>
+                <url>https://despatchbay.shipperhq.com/despatch-bay-ws/v1/</url>
+                <model>webshopapps_despatchbay/carrier_despatchbay</model>
+                <debug>0</debug>
+                <label_size>1A4</label_size>
+                <all_methods></all_methods>
+                <allowed_methods>Priority 12,DB_1,DB_2,DB_3,DB_4,DB_5,DB_6,DB_7,DB_8,DB_9,DB_10,DB_11,DB_12,DB_13,DB_14,DB_15,DB_16,DB_17,DB_18,DB_19,DB_20,DB_21,DB_22,DB_23,DB_24,DB_25,DB_26,DB_27,DB_28,DB_29,DB_30,DB_31,DB_32,DB_33,DB_34,DB_35,DB_36,DB_37,DB_38,DB_39,DB_40,DB_41,DB_42,DB_43,DB_44,DB_45,DB_46,DB_47,DB_48,DB_49,DB_50,DB_51,DB_52,DB_53,DB_54,DB_55,DB_56,DB_57,DB_58,DB_59,DB_60,DB_61,DB_62,DB_63,DB_64,DB_65,DB_66,DB_67,DB_68,DB_69,DB_70,DB_71,DB_72,DB_73,DB_74,DB_75</allowed_methods>
+                <shipment_email>1</shipment_email>
+                <shipment_dashboard>1</shipment_dashboard>
+                <sallowspecific>0</sallowspecific>
+                <showmethod>0</showmethod>
+                <specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
+                <notification_severity>1</notification_severity>
+                <notification_msg>This store and Shipper HQ are out of synch, please Synchronize Now</notification_msg>
+            </despatchbay>
+        </carriers>
+    </default>
+</config>

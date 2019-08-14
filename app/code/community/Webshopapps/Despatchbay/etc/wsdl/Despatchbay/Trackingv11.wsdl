@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:despatchbay" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:despatchbay">
+    <types>
+        <xsd:schema targetNamespace="urn:despatchbay">
+            <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+            <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+            <xsd:complexType name="TrackingCodeType">
+                <xsd:all>
+                    <xsd:element name="Code" type="xsd:int"/>
+                    <xsd:element name="Description" type="xsd:string"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="ArrayOfTrackingCodeType">
+                <xsd:complexContent>
+                    <xsd:restriction base="SOAP-ENC:Array">
+                        <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:TrackingCodeType[]"/>
+                    </xsd:restriction>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="TrackingType">
+                <xsd:all>
+                    <xsd:element name="Date" type="xsd:string"/>
+                    <xsd:element name="Time" type="xsd:string"/>
+                    <xsd:element name="Code" type="xsd:string"/>
+                    <xsd:element name="Description" type="xsd:string"/>
+                    <xsd:element name="Location" type="xsd:string"/>
+                    <xsd:element name="Signatory" type="xsd:string"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="ArrayOfTrackingType">
+                <xsd:complexContent>
+                    <xsd:restriction base="SOAP-ENC:Array">
+                        <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:TrackingType[]"/>
+                    </xsd:restriction>
+                </xsd:complexContent>
+            </xsd:complexType>
+        </xsd:schema>
+    </types>
+    <message name="GetTrackingRequest">
+        <part name="trackingNumber" type="xsd:string"/></message>
+    <message name="GetTrackingResponse">
+        <part name="return" type="tns:ArrayOfTrackingType"/></message>
+    <portType name="TrackingServicePortType">
+        <operation name="GetTracking">
+            <documentation>Returns tracking information for a tracking number</documentation>
+            <input message="tns:GetTrackingRequest"/>
+            <output message="tns:GetTrackingResponse"/>
+        </operation>
+    </portType>
+    <binding name="TrackingServiceBinding" type="tns:TrackingServicePortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="GetTracking">
+            <soap:operation soapAction="urn:despatchbay#GetTracking" style="rpc"/>
+            <input><soap:body use="encoded" namespace="urn:despatchbay" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="urn:despatchbay" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+        </operation>
+    </binding>
+    <service name="TrackingService">
+        <port name="TrackingServicePort" binding="tns:TrackingServiceBinding">
+            <soap:address location="http://api.despatchbaypro.com/api/soap/v11/tracking.php"/>
+        </port>
+    </service>
+</definitions>

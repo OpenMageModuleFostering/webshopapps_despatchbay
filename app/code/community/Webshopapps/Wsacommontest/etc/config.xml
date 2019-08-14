@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Webshopapps_Wsacommontest>
+            <version>0.1.0</version>
+        </Webshopapps_Wsacommontest>
+    </modules>
+    <phpunit>
+        <suite>
+            <modules>
+                <Webshopapps_Wsacommontest />
+            </modules>
+        </suite>
+    </phpunit>
+</config>
