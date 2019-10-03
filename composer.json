@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/WebShopApps_DespatchBay",
+    "name": "OpenMageModuleFostering\/WebShopApps_DespatchBay",
     "type": "magento-module",
     "license": "OSL-v3.0",
     "homepage": "",
     "description": "Despatch Bay",
     "authors": [
-    {
-        "name": "Karen Baker",
-        "email": "sales@webshopapps.com"
-    }
-],
+        {
+            "name": "Karen Baker",
+            "email": "sales@webshopapps.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
